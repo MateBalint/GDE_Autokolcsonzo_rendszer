@@ -1,0 +1,1 @@
+# GDE_Autokolcsonzo_rendszer
