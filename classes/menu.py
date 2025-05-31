@@ -9,7 +9,7 @@ class Menu:
         """
         A menü szövegének megjelenítését vegző metódus.
         """
-        print("\n===== Autó Kölcsönző Rendszer =====")
+        print("\n===== Autó Kölcsönző Rendszer Menü =====")
         print("1. Autó bérlés")
         print("2. Bérlés lemondása")
         print("3. Bérlések listázása")
@@ -37,7 +37,7 @@ class Menu:
         
         while True:
             self.menu_szoveg_megjelenites()
-            choice = input("Válassz ki egy lehetőséget: ")
+            choice = input("Válassz ki egy lehetőséget a menü opció sorszám megadásával: ")
             if choice == "1":
                 print("\n")
                 self.berles.auto_berles()

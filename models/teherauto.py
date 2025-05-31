@@ -9,4 +9,4 @@ class TeherAuto(Auto):
         """
         Visszaadja a TeherAuto objektum property-jeit stringgé összefűzve.
         """
-        return f"Teherautó.\nAzonosító: {self.azonosito}\nRendszám: {self.rendszam}\nTípus: {self.tipus}\nBérleti díj: {self.berleti_dij}\nTeherbírás: {self.teherbiras}\n"
+        return f"Azonosító: {self.azonosito}\nRendszám: {self.rendszam}\nTípus: {self.tipus}\nBérleti díj: {self.berleti_dij} forint\nTeherbírás: {self.teherbiras}kg\n"

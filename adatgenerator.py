@@ -12,6 +12,7 @@ class AdatGenerator:
     autok: list[Auto] = []
     berlesek: list[Autokolcsonzo] = []
     berles_dictionary: dict[int, list[datetime]] = {}
+    auto_azonosito_lista: list[int] = []
 
     def __init__(self):
         self.autok = self.import_autok()
@@ -37,6 +38,8 @@ class AdatGenerator:
                                           legkondicionalok)
                 szemelyautok.append(szemelyauto)
                 self.berles_dictionary[azonosito] = []
+                self.auto_azonosito_lista.append(azonosito)
+                
         return szemelyautok
 
     def import_teherautok(self):
@@ -57,6 +60,7 @@ class AdatGenerator:
                 teherauto = TeherAuto(azonosito, tipus, rendszam, model, berleti_dij, teherbiras)
                 teherautok.append(teherauto)
                 self.berles_dictionary[azonosito] = []
+                self.auto_azonosito_lista.append(azonosito)
 
         return teherautok
 

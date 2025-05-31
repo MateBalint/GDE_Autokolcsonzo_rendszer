@@ -18,6 +18,5 @@ class Autokolcsonzo:
         Kiírja a Autokolcsonzo objektum adatait.
         """
         
-        auto_adatok = f"{self.auto.azonosito} - {self.auto.rendszam} - {self.auto.model} - {self.auto.tipus}"
-        
-        print(f"{self.azonosito} {self.kolcsonzo_neve} {self.kolcsonzes_ideje} {self.telefonszam} {self.email_cim} - \nAuto adatok: {auto_adatok}\n")
+        auto_adatok = f"Azonosító: {self.auto.azonosito} - Rendszám: {self.auto.rendszam} - Jármű modell: {self.auto.model} - Típus: {self.auto.tipus}"
+        print(f"Azonosító: {self.azonosito}\nKölcsönző neve: {self.kolcsonzo_neve}\nKölcsönzés ideje: {self.kolcsonzes_ideje.date()}\nTelefonszám: {self.telefonszam}\nEmail cím: {self.email_cim}\nAutó adatok: {auto_adatok}\n")

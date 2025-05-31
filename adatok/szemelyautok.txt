@@ -1,5 +1,5 @@
 Azonosító,Típus,Rendszám,Modell,Bérleti díj,Ülések száma, Légkondícionáló
-2,SZEMÉLYAUTO,DEF-456,Toyota Corolla,12000,5,Van
-3,SZEMÉLYAUTO,GHI-789,Volkswagen Golf,10000,5,Nincs
-5,SZEMÉLYAUTO,MNO-345,Audi A4,14500,5,Van
-7,SZEMÉLYAUTO,STU-901,BMW 320i,15500,4,Van
+2,Személyautó,DEF-456,Toyota Corolla,12000,5,Van
+3,Személyautó,GHI-789,Volkswagen Golf,10000,5,Nincs
+5,Személyautó,MNO-345,Audi A4,14500,5,Van
+7,Személyautó,STU-901,BMW 320i,15500,4,Van

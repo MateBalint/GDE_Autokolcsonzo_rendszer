@@ -1,5 +1,5 @@
 from adatgenerator import AdatGenerator
-from classes.berles import Berles
+from classes.berlesszerviz import BerlesSzerviz
 from classes.menu import Menu
 
 class AutoKolcsonzoApp:
@@ -9,7 +9,7 @@ class AutoKolcsonzoApp:
         A program fő belépési pontja.
         """
         adatgenerator = AdatGenerator()
-        berles = Berles(adatgenerator)
+        berles = BerlesSzerviz(adatgenerator)
         menu = Menu(berles)
         menu.run()
         
