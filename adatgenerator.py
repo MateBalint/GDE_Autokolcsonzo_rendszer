@@ -1,93 +1,124 @@
-from datetime import datetime
+from datetime import datetime,timedelta
 
-from classes.auto import Auto
-from classes.autokolcsonzo import AutoKolcsonzo
-from classes.szemelyauto import SzemelyAuto
-from classes.teherauto import TeherAuto
+from models.auto import Auto
+from models.autokolcsonzo import Autokolcsonzo
+from models.szemelyauto import SzemelyAuto
+from models.teherauto import TeherAuto
 
+class AdatGenerator:
+    """
+    Osztaly amely az adatok beolvasasat es a program indulasanal szukseges adatok legyartasat vegzi.
+    """
+    autok: list[Auto] = []
+    berlesek: list[Autokolcsonzo] = []
+    berles_dictionary: dict[int, list[datetime]] = {}
 
-class AdatGenerator():
-    
-    autok = []
-    szabad_autok = []
-    berlesek = []
-    berelt_autok = []
-    
     def __init__(self):
         self.autok = self.import_autok()
         self.berles_generalas()
-        berelt_autok = self.autok[:4]
-        szabad_autok = self.autok[4:]
-    
+
+    def import_szemelyautok(self):
+        szemelyautok: list[Auto] = []
+        with open('adatok/szemelyautok.txt', encoding='utf-8') as file:
+            next(file)
+            for line in file:
+                tulajdonsagok = line.split(',')
+                azonosito = int(tulajdonsagok[0])
+                tipus = tulajdonsagok[1]
+                rendszam = tulajdonsagok[2]
+                model = tulajdonsagok[3]
+                berleti_dij = int(tulajdonsagok[4])
+                ulesek_szama = int(tulajdonsagok[5])
+                legkondicionalok = tulajdonsagok[6]
+                szemelyauto = SzemelyAuto(azonosito, tipus, rendszam, model, berleti_dij, ulesek_szama,
+                                          legkondicionalok)
+                szemelyautok.append(szemelyauto)
+                self.berles_dictionary[azonosito] = []
+        return szemelyautok
+
+    def import_teherautok(self):
+        teherautok: list[Auto] = []
+        with open('adatok/teherautok.txt', encoding='utf-8') as file:
+            next(file)
+            for line in file:
+                tulajdonsagok = line.split(',')
+                azonosito = int(tulajdonsagok[0])
+                tipus = tulajdonsagok[1]
+                rendszam = tulajdonsagok[2]
+                model = tulajdonsagok[3]
+                berleti_dij = int(tulajdonsagok[4])
+                teherbiras = int(tulajdonsagok[5])
+                teherauto = TeherAuto(azonosito, tipus, rendszam, model, berleti_dij, teherbiras)
+                teherautok.append(teherauto)
+                self.berles_dictionary[azonosito] = []
+
+        return teherautok
+
     def import_autok(self):
         autok: list[Auto] = []
-
         try:
-            with open('autok.txt', encoding='utf-8') as file:
-                for line in file:
-                    fields = line.split(',')
-                    if fields[1] == 'SZEMELYAUTO':
-                        azonosito = int(fields[0])
-                        rendszam = fields[2]
-                        tipus = fields[1]
-                        model = fields[3]
-                        berleti_dij = int(fields[4])
-                        ulesek_szama = int(fields[5])
-                        legkondicionalok = fields[6]
-
-                        auto = SzemelyAuto(azonosito, tipus, rendszam, model, berleti_dij, ulesek_szama, legkondicionalok)
-                        autok.append(auto)
-                        
-                    if fields[1] == 'TEHERAUTO':
-                        rendszam = fields[2]
-                        tipus = fields[1]
-                        model = fields[3]
-                        berleti_dij = int(fields[4])
-                        teherbiras = int(fields[5])
-                        azonosito = int(fields[0])
-                        teherauto = TeherAuto(azonosito, tipus, rendszam, model, berleti_dij, teherbiras)
-                        autok.append(teherauto)
+            autok.extend(self.import_szemelyautok())
+            autok.extend(self.import_teherautok())
         except Exception as e:
             print(f"Hiba tortent: ${str(e)}")
             return []
 
         return autok
-    
+
     def berles_generalas(self):
-        berles1 = AutoKolcsonzo(
+        berles1 = Autokolcsonzo(
             kolcsonzo_neve="Kovács Péter",
-            auto=self.berelt_autok[0],
-            kolcsonzes_ideje=datetime(2025, 5, 10, 9, 0),
+            auto=self.autok[0],
+            kolcsonzes_ideje=self.datum_krealas(1),
             telefonszam="+36 30 123 4567",
             email_cim="kovacs.peter@gmail.hu",
-            azonosito=101
+            azonosito=1
         )
 
-        berles2 = AutoKolcsonzo(
+        self.berles_dictionary[berles1.azonosito].append(berles1.kolcsonzes_ideje)
+
+        berles2 = Autokolcsonzo(
             kolcsonzo_neve="Nagy Anna",
-            auto=self.berelt_autok[1],
-            kolcsonzes_ideje=datetime(2025, 5, 11, 14, 30),
+            auto=self.autok[1],
+            kolcsonzes_ideje=self.datum_krealas(11),
             telefonszam="+36 20 765 4321",
             email_cim="nagy.anna@gmail.hu",
-            azonosito=102
+            azonosito=2
         )
 
-        berles3 = AutoKolcsonzo(
+        self.berles_dictionary[berles2.azonosito].append(berles2.kolcsonzes_ideje)
+
+        berles3 = Autokolcsonzo(
             kolcsonzo_neve="Szabó László",
-            auto=self.berelt_autok[2],
-            kolcsonzes_ideje=datetime(2025, 5, 12, 8, 15),
+            auto=self.autok[2],
+            kolcsonzes_ideje=self.datum_krealas(2),
             telefonszam="+36 70 987 6543",
             email_cim="szabo.laszlo@gmail.hu",
-            azonosito=103
+            azonosito=3
         )
 
-        berles4 = AutoKolcsonzo(
+        self.berles_dictionary[berles3.azonosito].append(berles3.kolcsonzes_ideje)
+
+        berles4 = Autokolcsonzo(
             kolcsonzo_neve="Tóth Erzsébet",
-            auto=self.berelt_autok[3],
-            kolcsonzes_ideje=datetime(2025, 5, 13, 16, 45),
+            auto=self.autok[3],
+            kolcsonzes_ideje=self.datum_krealas(30),
             telefonszam="+36 20 555 6666",
             email_cim="toth.erzsebet@gmail.hu",
-            azonosito=104
+            azonosito=4
         )
-        
+
+        self.berles_dictionary[berles4.azonosito].append(berles4.kolcsonzes_ideje)
+
         self.berlesek = [berles1, berles2, berles3, berles4]
+
+    def datum_krealas(self, plusz_napok:int):
+        datum = datetime.now()
+        ev = datum.year
+        honap = datum.month
+        nap = datum.day
+        
+        uj_datum = datetime(ev, honap, nap) + timedelta(days=plusz_napok)
+        
+        return uj_datum
+        
