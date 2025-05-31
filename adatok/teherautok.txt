@@ -1,4 +1,4 @@
-Azonosito,Tipus,Rendszam,Modell,Berleti dij,Teherbiras
-1,TEHERAUTO,ABC-123,Ford Transit,15000,1500
-4,TEHERAUTO,JKL-012,Mercedes Sprinter,18000,2000
-6,TEHERAUTO,PQR-678,Renault Master,16500,1800
+Azonosító,Típus,Rendszám,Modell,Bérleti díj,Teherbírás
+1,TEHERAUTÓ,ABC-123,Ford Transit,15000,1500
+4,TEHERAUTÓ,JKL-012,Mercedes Sprinter,18000,2000
+6,TEHERAUTÓ,PQR-678,Renault Master,16500,1800

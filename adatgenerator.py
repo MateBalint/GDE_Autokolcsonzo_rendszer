@@ -7,7 +7,7 @@ from models.teherauto import TeherAuto
 
 class AdatGenerator:
     """
-    Osztaly amely az adatok beolvasasat es a program indulasanal szukseges adatok legyartasat vegzi.
+    Osztály, amely az adatok beolvasását és a program indításánál szükséges adatok legyártását végzi.
     """
     autok: list[Auto] = []
     berlesek: list[Autokolcsonzo] = []
@@ -18,6 +18,9 @@ class AdatGenerator:
         self.berles_generalas()
 
     def import_szemelyautok(self):
+        """
+        Az elerhétő személyautó adatok importálja fájlból. 
+        """
         szemelyautok: list[Auto] = []
         with open('adatok/szemelyautok.txt', encoding='utf-8') as file:
             next(file)
@@ -37,6 +40,9 @@ class AdatGenerator:
         return szemelyautok
 
     def import_teherautok(self):
+        """
+        Az elérhető teherautó adatok importálja fájlból.
+        """
         teherautok: list[Auto] = []
         with open('adatok/teherautok.txt', encoding='utf-8') as file:
             next(file)
@@ -55,17 +61,23 @@ class AdatGenerator:
         return teherautok
 
     def import_autok(self):
+        """
+        Az összes jármű adat importálását végzi.
+        """
         autok: list[Auto] = []
         try:
             autok.extend(self.import_szemelyautok())
             autok.extend(self.import_teherautok())
         except Exception as e:
-            print(f"Hiba tortent: ${str(e)}")
+            print(f"Hiba történt: ${str(e)}")
             return []
 
         return autok
 
     def berles_generalas(self):
+        """
+        A default bérléseket generálja le. Ezek a seed adatok.
+        """
         berles1 = Autokolcsonzo(
             kolcsonzo_neve="Kovács Péter",
             auto=self.autok[0],
@@ -113,6 +125,9 @@ class AdatGenerator:
         self.berlesek = [berles1, berles2, berles3, berles4]
 
     def datum_krealas(self, plusz_napok:int):
+        """
+        A dátum kreálását végző metódus. Csak az év, hónap és nap adatokkal dolgozunk.
+        """
         datum = datetime.now()
         ev = datum.year
         honap = datum.month

@@ -1,19 +1,26 @@
-import os
-
 class Menu:
+    """
+    A menü megjelenítésért felelős osztály.
+    """
     def __init__(self, berles):
         self.berles = berles
     
-    def display_menu(self):
-        print("\n===== Auto Kolcsonzo Rendszer =====")
-        print("1. Auto berles")
-        print("2. Berles lemondasa")
-        print("3. Berlesek listazasa")
-        print("4. Osszes auto listazasa")
+    def menu_szoveg_megjelenites(self):
+        """
+        A menü szövegének megjelenítését vegző metódus.
+        """
+        print("\n===== Autó Kölcsönző Rendszer =====")
+        print("1. Autó bérlés")
+        print("2. Bérlés lemondása")
+        print("3. Bérlések listázása")
+        print("4. Összes autó listázása")
         print("0. Kilépés")
         print("==================================")
         
     def run(self):
+        """
+        A menü osztály fő belépési pontja. 
+        """
         print("""
         ····································································
         :    _         _    __  _    _   _ _          _   _            ___ :
@@ -29,8 +36,8 @@ class Menu:
         """)
         
         while True:
-            self.display_menu()
-            choice = input("Valassz ki egy lehetoseget: ")
+            self.menu_szoveg_megjelenites()
+            choice = input("Válassz ki egy lehetőséget: ")
             if choice == "1":
                 print("\n")
                 self.berles.auto_berles()

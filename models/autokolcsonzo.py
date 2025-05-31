@@ -1,10 +1,9 @@
 from datetime import datetime
 from models.auto import Auto
 
-
 class Autokolcsonzo:
     """
-    A Berles osztaly amely tartalmazza a berleshez szukseges adatokat. Pl.: berelt auto, berlo neve, berles ideje stb.
+    A Autokolcsonzo osztály, amely tartalmazza a bérléshez szükséges adatokat. Pl.: bérelt autó, bérlő neve, bérlés ideje stb.
     """
     def __init__(self, kolcsonzo_neve: str, auto: Auto, kolcsonzes_ideje: datetime, telefonszam: str, email_cim: str, azonosito: int):
         self.azonosito = azonosito
@@ -16,7 +15,7 @@ class Autokolcsonzo:
 
     def kiiras(self):
         """
-        Kiirja a Berles objektum adatait.
+        Kiírja a Autokolcsonzo objektum adatait.
         """
         
         auto_adatok = f"{self.auto.azonosito} - {self.auto.rendszam} - {self.auto.model} - {self.auto.tipus}"

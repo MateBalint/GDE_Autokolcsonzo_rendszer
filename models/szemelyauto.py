@@ -9,7 +9,6 @@ class SzemelyAuto(Auto):
 
     def info(self):
         """
-        Visszaadja a Szemelyauto objektum property-jeit string-ge osszefuzve.
-        :return: Objektum adatok.
+        Visszaadja a SzemelyAuto objektum property-jeit stringgé összefűzve.
         """
-        return f"Szemelyauto.\nAzonosito: {self.azonosito}\nRendszam: {self.rendszam}\nTipus: {self.tipus}\nBerleti dij: {self.berleti_dij}\nUlesek szama: {self.ulesek_szama}\nLegkondicionalo: {self.legkondicionalo}\n"
+        return f"Személyautó.\nAzonosító: {self.azonosito}\nRendszám: {self.rendszam}\nTípus: {self.tipus}\nBérleti díj: {self.berleti_dij}\nÜlések száma: {self.ulesek_szama}\nLégkondícionáló: {self.legkondicionalo}\n"

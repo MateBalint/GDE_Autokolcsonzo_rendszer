@@ -1,104 +1,101 @@
 from datetime import datetime
-
 from adatgenerator import AdatGenerator
 from models.auto import Auto
 from models.autokolcsonzo import Autokolcsonzo
 
-
-class Berles():
-    
+class Berles:
+    """
+    Az autóbérléshez szükséges osztály, amely egy autó bérlését egy napra tárolja.
+    """
     autok: list[Auto] = []
     berlesek: list[Autokolcsonzo] = []
     berles_dictionary: dict[int, list[datetime]] = {}
-    
+
     def __init__(self, adatgenerator: AdatGenerator):
         self.adatgenerator = adatgenerator
         self.autok = adatgenerator.autok
         self.berlesek = adatgenerator.berlesek
         self.berles_dictionary = adatgenerator.berles_dictionary
-    
+
     def auto_berles(self):
         """
-        A berles krealasat intezi ez a metodus.
-        Eloszor megnezi hogy az adott auto berelve van-e mar. Ha nincs akkor azonnal tudjuk berelni.
-        Ha berelve van az auto akkor pedig a berlesek listajan iteral vegig a logika es megkeresi az adott berlest ami tartalmazza az autot. Ezutan megnezi hogy az adott idopontra berelheto-e az auto
-        A program gyorsitasa erdekeben van az elozetes check a dictionary-ben, hogy megnezzuk hogy az auto berelve van-e mar.
+        A bérlés kreálását végzi ez a metódus.
+        Először megnézi, hogy az adott autó bérelve van-e már. Ha nincs, akkor azonnal tudjuk bérelni.
+        A program gyorsítása érdekében van az előzetes check a dictionary-ben, hogy megnézzük, hogy az autó bérelve van-e már.
         """
         berles_azonosito = self.legnagyobb_berles_azonosito_megszerzese() + 1
-        nev = input("Kerem adja meg a nevet: ")
-        auto_azonosito = int(input("Kerem adja meg az auto azonositot: "))
-        ev = int(input("Kerem adja meg  a kolcsonzeshez az evet: "))
-        honap = int(input("Kerem adja meg  a kolcsonzeshez az honapot: "))
-        nap = int(input("Kerem adja meg  a kolcsonzeshez az napot: "))
+        nev = input("Kérem adja meg a nevét: ")
+        auto_azonosito = int(input("Kérem adja meg az autó azonosítót: "))
+        ev = int(input("Kérem adja meg  a kölcsönzéshez az évet: "))
+        honap = int(input("Kérem adja meg  a kölcsönzéshez az hónapot: "))
+        nap = int(input("Kérem adja meg  a kölcsönzéshez az napot: "))
         datum = datetime(ev, honap, nap)
 
         if datum in self.berles_dictionary[auto_azonosito]:
-            print("Van mar meglevo berles a megadott napra igy nem lehetseges ujra kiberelni jarmuvet!")
+            print("Van mar meglévő bérlés a megadott napra így nem lehetséges újra kibérelni járművet!")
             return
-        
-        telefonszam = input("Kerem adja meg a telefonszamat: ")
-        email_cim = input("Kerem adja meg a email cimet: ")\
-        
+
+        telefonszam = input("Kérem adja meg a telefonszámát: ")
+        email_cim = input("Kérem adja meg a email címét: ")
         berlendo_auto = None
         for auto in self.autok:
             if auto.azonosito == auto_azonosito:
                 berlendo_auto = auto
                 break
-                
+
         berles = Autokolcsonzo(nev, berlendo_auto, datum, telefonszam, email_cim, berles_azonosito)
         self.berlesek.append(berles)
         self.berles_dictionary[auto_azonosito].append(datum)
-    
+        print(f"A bérlés ára: ${berlendo_auto.berleti_dij}")
+
     def berles_lemondasa(self):
         """
-        A berles torleset a berles azonositoja alapjan vegzo metodus.
+        A bérlés törlését a bérlés azonosítója alapján végző metódus.
         """
         auto_azonosito = None
         torolni_kivant_berles = None
-        
+
         try:
-            berles_azonosito = int(input("Kerem adja meg a berles azonositojat: "))
+            berles_azonosito = int(input("Kérem adja meg a bérlés azonosítóját: "))
 
             for berles in self.berlesek:
                 if berles.azonosito == berles_azonosito:
                     torolni_kivant_berles = berles
                     auto_azonosito = berles.auto.azonosito
-                    
+
             if torolni_kivant_berles is None:
-                print("Nem letezik berles ilyen azonositoval!")
+                print("Nem létezik bérlés ilyen azonosítóval!")
                 return
-            
-            ev = int(input("Kerem adja meg  a berles evet: "))
-            honap = int(input("Kerem adja meg  a berlesi honapot: "))
-            nap = int(input("Kerem adja meg a berles napjat: "))
+
+            ev = int(input("Kérem adja meg  a bérlés évét: "))
+            honap = int(input("Kérem adja meg a bérlési hónapot: "))
+            nap = int(input("Kérem adja meg a bérlés napját: "))
             datum = datetime(ev, honap, nap)
 
             self.berlesek.remove(torolni_kivant_berles)
             self.berles_dictionary[auto_azonosito].remove(datum)
-        
+
         except Exception as e:
-            print(f"Hiba tortent: ${str(e)}")
+            print(f"Hiba történt: ${str(e)}")
 
     def berlesek_listazasa(self):
         """
-        Kiirja a berleseket a console-ra.
+        Kiírja a bérléseket a console-ra.
         """
         for berles in self.berlesek:
             berles.kiiras()
-    
-                
+
     def legnagyobb_berles_azonosito_megszerzese(self):
         """
-        Az utolso berles azonositojat szerzi meg, ahhoz hogy az uj berles azonositojat meg tudjuk allapitani. Minden esetben az uj berles azonositoja a legutolso berles azonositojanak inkrementalasa eggyel.
-        :return: 
+        Az utolsó bérlés azonosítóját szerzi meg, ahhoz, hogy az új bérlés azonosítóját meg tudjuk állapítani. Minden esetben az új bérlés azonosítója a legutolsó bérlés azonosítójának inkrementálása eggyel.
         """
         utolso_berles = self.berlesek[-1]
-        
+
         return utolso_berles.azonosito
-        
+
     def osszes_auto_listazasa(self):
         """
-        Az osszes autot tartalmazo listan vegig iteral es kiirja a console-ra az autok adatait.
+        Az összes autót tartalmazó listán végig iterál, és kiírja a console-ra az autók adatait.
         """
         for auto in self.autok:
             if hasattr(auto, "legkondicionalo"):
