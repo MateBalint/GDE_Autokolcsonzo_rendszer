@@ -106,7 +106,7 @@ class AdatGenerator:
 
         berles3 = Autokolcsonzo(
             kolcsonzo_neve="Szabó László",
-            auto=self.autok[2],
+            auto=self.autok[0],
             kolcsonzes_ideje=self.datum_krealas(2),
             telefonszam="+36 70 987 6543",
             email_cim="szabo.laszlo@gmail.hu",
