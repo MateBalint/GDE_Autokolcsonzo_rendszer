@@ -91,7 +91,7 @@ class AdatGenerator:
             azonosito=1
         )
 
-        self.berles_dictionary[berles1.azonosito].append(berles1.kolcsonzes_ideje)
+        self.berles_dictionary[berles1.auto.azonosito].append(berles1.kolcsonzes_ideje)
 
         berles2 = Autokolcsonzo(
             kolcsonzo_neve="Nagy Anna",
@@ -102,7 +102,7 @@ class AdatGenerator:
             azonosito=2
         )
 
-        self.berles_dictionary[berles2.azonosito].append(berles2.kolcsonzes_ideje)
+        self.berles_dictionary[berles2.auto.azonosito].append(berles2.kolcsonzes_ideje)
 
         berles3 = Autokolcsonzo(
             kolcsonzo_neve="Szabó László",
@@ -113,7 +113,7 @@ class AdatGenerator:
             azonosito=3
         )
 
-        self.berles_dictionary[berles3.azonosito].append(berles3.kolcsonzes_ideje)
+        self.berles_dictionary[berles3.auto.azonosito].append(berles3.kolcsonzes_ideje)
 
         berles4 = Autokolcsonzo(
             kolcsonzo_neve="Tóth Erzsébet",
@@ -124,7 +124,7 @@ class AdatGenerator:
             azonosito=4
         )
 
-        self.berles_dictionary[berles4.azonosito].append(berles4.kolcsonzes_ideje)
+        self.berles_dictionary[berles4.auto.azonosito].append(berles4.kolcsonzes_ideje)
 
         self.berlesek = [berles1, berles2, berles3, berles4]
 

@@ -85,7 +85,7 @@ class BerlesSzerviz:
             datum = datetime(ev, honap, nap)
 
             self.berles.berlesek.remove(torolni_kivant_berles)
-            self.berles.berles_dictionary[berles_azonosito].remove(datum)
+            self.berles.berles_dictionary[auto_azonosito].remove(datum)
 
         except Exception as e:
             print(f"Hiba történt: ${str(e)}")
@@ -110,6 +110,7 @@ class BerlesSzerviz:
         """
         Az összes autót tartalmazó listán végig iterál, és kiírja a console-ra az autók adatait.
         """
+        print("Gépjárművek: \n")
         for auto in self.berles.autok:
             if hasattr(auto, "legkondicionalo"):
                 print(auto.info())

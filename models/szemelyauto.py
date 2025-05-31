@@ -11,4 +11,4 @@ class SzemelyAuto(Auto):
         """
         Visszaadja a SzemelyAuto objektum property-jeit stringgé összefűzve.
         """
-        return f"Azonosító: {self.azonosito}\nRendszám: {self.rendszam}\nTípus: {self.tipus}\nBérleti díj: {self.berleti_dij} forint\nÜlések száma: {self.ulesek_szama}\nLégkondícionáló: {self.legkondicionalo}\n"
+        return f"Azonosító: {self.azonosito}\nRendszám: {self.rendszam}\nTípus: {self.tipus}\nModell: {self.model}\nBérleti díj: {self.berleti_dij} forint\nÜlések száma: {self.ulesek_szama}\nLégkondícionáló: {self.legkondicionalo}\n"
