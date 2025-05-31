@@ -66,7 +66,7 @@ class BerlesSzerviz:
         """
         auto_azonosito = None
         torolni_kivant_berles = None
-
+        datum = None
         try:
             berles_azonosito = int(input("Kérem adja meg a bérlés azonosítóját: "))
 
@@ -89,6 +89,13 @@ class BerlesSzerviz:
 
         except Exception as e:
             print(f"Hiba történt: ${str(e)}")
+            print("Nem került törlésre az adott bérlés mivel hibás adatokat adott meg!")
+            
+            if torolni_kivant_berles not in self.berles.berlesek:
+                self.berles.berlesek.append(torolni_kivant_berles)
+                
+            if datum not in self.berles.berles_dictionary[auto_azonosito]:
+                self.berles.berles_dictionary[auto_azonosito].append(datum)
 
     def berlesek_listazasa(self):
         """
