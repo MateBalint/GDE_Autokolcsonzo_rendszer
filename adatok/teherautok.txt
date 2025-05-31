@@ -1,0 +1,4 @@
+Azonosito,Tipus,Rendszam,Modell,Berleti dij,Teherbiras
+1,TEHERAUTO,ABC-123,Ford Transit,15000,1500
+4,TEHERAUTO,JKL-012,Mercedes Sprinter,18000,2000
+6,TEHERAUTO,PQR-678,Renault Master,16500,1800
